@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: dea66ba129eb81f4f899bfc0bf1dc1c6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerMovement: {instanceID: 0}
+  - orbBehavior: {instanceID: 0}
+  - grabDetect: {instanceID: 0}
+  - orbHolder: {instanceID: 0}
+  - activeOrb: {instanceID: 0}
+  - lastActiveOrb: {instanceID: 0}
+  - grabCheckedOrb: {instanceID: 0}
+  - inactiveOrbSprite: {fileID: 21300000, guid: c38da45f3fd5c3443ba6d20ab7bd01af, type: 3}
+  - activeOrbSprite: {fileID: 21300000, guid: 14a2092d00a12334a913c8fd59954065, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
