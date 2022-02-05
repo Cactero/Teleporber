@@ -16,6 +16,7 @@ public class GrabController : MonoBehaviour
     public GameObject activeOrb;
     public GameObject lastActiveOrb = null;
     public GameObject grabCheckedOrb;
+    public bool isInWall;
 
     public Sprite inactiveOrbSprite;
     public Sprite activeOrbSprite;
@@ -27,6 +28,11 @@ public class GrabController : MonoBehaviour
         if (grabCheck.collider != null && grabCheck.collider.tag == "Orb")
         {
             grabCheckedOrb = grabCheck.collider.gameObject;
+            if (isInWall)
+            {
+                return;
+            }
+
             if (Input.GetKeyDown(Grab) && !isHoldingSomething)
             {   
                 grabCheckedOrb.transform.parent = orbHolder;
@@ -53,5 +59,33 @@ public class GrabController : MonoBehaviour
                 lastActiveOrb = activeOrb;
             }
         }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        {
+            isInWall = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        {
+            isInWall = false;
+        }
+    }
+
+    private void OnDrawGizmosSelected() 
+    {
+    if (transform.localScale.x > 0)
+    {
+        Debug.DrawRay(grabDetect.position, Vector3.right * rayDist, Color.cyan);
+    }
+    else
+    {
+        Debug.DrawRay(grabDetect.position, Vector3.left * rayDist, Color.cyan);
+    }
     }
 }

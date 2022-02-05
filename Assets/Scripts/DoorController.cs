@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public Vector2 startPosition;
-    public Vector2 endPosition;
-    public float speed;
-
-    void Start() {
+    private Animator animator;
+    void Awake() {
         {
-            startPosition = transform.position;
-            endPosition = new Vector2 (transform.position.x, transform.position.y + 2);
+            animator = GetComponent<Animator>();
         }
     }
     public void OpenDoor()
     {
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(startPosition, endPosition, step);
+        animator.SetBool("DoorOpen", true);
     }
 
     public void CloseDoor()
     {
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(endPosition, startPosition, step);
+        animator.SetBool("DoorOpen", false);
     }
 }
