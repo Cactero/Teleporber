@@ -21,6 +21,12 @@ public class GrabController : MonoBehaviour
     public Sprite inactiveOrbSprite;
     public Sprite activeOrbSprite;
     
+    void Start()
+    {
+        //Collider orbHolderCollider = orbHolder.GetComponent<Collider2D>();
+    }
+
+
     void Update()
     {
         RaycastHit2D grabCheck = Physics2D.Raycast(grabDetect.position, Vector2.right * transform.localScale, rayDist);
@@ -61,18 +67,22 @@ public class GrabController : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        if (other.gameObject.layer != LayerMask.NameToLayer("whatIsGround"))
         {
+            CircleCollider2D orbHolderCollider = orbHolder.GetComponent<CircleCollider2D>();
+            orbHolderCollider.radius = 0.2f;
             isInWall = true;
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        if (other.gameObject.layer != LayerMask.NameToLayer("whatIsGround"))
         {
+            CircleCollider2D orbHolderCollider = orbHolder.GetComponent<CircleCollider2D>();
+            orbHolderCollider.radius = 0f;
             isInWall = false;
         }
     }
