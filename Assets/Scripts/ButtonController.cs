@@ -4,35 +4,47 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
-    public Transform playerCheck;
-    public GameObject whatDoorWillAccept;
-    
-    public bool doorWillAcceptAnything;
-    public DoorController doorController;
-    
+    //public GameObject acceptedObject;
+    public enum AcceptedObject
+    {
+        Anything,
+        Orb
+    };
+        
+    [Header("Objects")]
+    public AcceptedObject acceptedObject;
+    public GameObject affectedDoor;
 
+    //[Header("Values")]    
+    //public bool doorAcceptsAnything;
+    private DoorController doorController;
+    
+    void Start()
+    {
+        doorController = affectedDoor.GetComponent<DoorController>();
+    }
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.tag == whatDoorWillAccept.tag || doorWillAcceptAnything)
+        if (other.gameObject.tag == acceptedObject.ToString() || acceptedObject == 0)
         {
-            OnButton();
+            ButtonOn();
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) 
     {
-        if (other.gameObject.tag == whatDoorWillAccept.tag || doorWillAcceptAnything)
+        if (other.gameObject.tag == acceptedObject.ToString() || acceptedObject == 0)
         {
-            OffButton();
+            ButtonOff();
         }
     }
 
-    void OnButton()
+    void ButtonOn()
     {
         doorController.OpenDoor();
     }
 
-    void OffButton()
+    void ButtonOff()
     {
         doorController.CloseDoor();
     }

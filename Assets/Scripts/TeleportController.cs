@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class TeleportController : MonoBehaviour
 {
-    public GameObject player;
+    [Header("Controls")]
     public KeyCode teleport;
-    public Vector2 playerDestination;
-    public Vector2 orbDestination;
-    
-    public bool canTeleport;
-    public float teleportRadius;
+    [Header("Layers")]
     public LayerMask orbLayer;
     public LayerMask activeOrbLayer;
+    [Header("Vectors")]
+    public Vector2 playerDestination;
+    public Vector2 orbDestination;
+    [Header("Values")]
+    public float teleportRadius;
+    public bool canTeleport;
+
     public bool isOrbInRadius;
 
-    [SerializeField] private GrabController grabController;
+    private GrabController grabController;
+
+    void Start()
+    {
+        grabController = GetComponent<GrabController>();
+    }
 
     void Update()
     {
-        isOrbInRadius = Physics2D.OverlapCircle(player.transform.position, teleportRadius, activeOrbLayer);
+        isOrbInRadius = Physics2D.OverlapCircle(transform.position, teleportRadius, activeOrbLayer);
         if (Input.GetKeyDown(teleport) && !grabController.isHoldingSomething && isOrbInRadius)
         {
             Teleport();
@@ -33,7 +41,7 @@ public class TeleportController : MonoBehaviour
     void Teleport()
     {   
         playerDestination = new Vector2 (grabController.activeOrb.transform.position.x, grabController.activeOrb.transform.position.y + 0.5f);
-        orbDestination = new Vector2 (player.transform.position.x, player.transform.position.y + 0.5f);
+        orbDestination = new Vector2 (transform.position.x, transform.position.y + 0.5f);
 
         transform.position = playerDestination;
         grabController.activeOrb.transform.position = orbDestination;

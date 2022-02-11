@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Objects")]
     public Rigidbody2D rb;
-    public float moveSpeed;
-    public float jumpForce;
-
-    public bool isGrounded;
-    public LayerMask whatIsGround;
-    public float checkRadius;
     public Transform groundCheck;
 
-    public float movement;
+
+    [Header("Player Values")]
+    public float moveSpeed;
+    public float jumpForce;
+    public float checkRadius;
+    private float movement;
+
+    [Header("Ground Checking")]
+    public bool isGrounded;
+    public LayerMask whatIsGround;
+
 
     void Start()
     {
