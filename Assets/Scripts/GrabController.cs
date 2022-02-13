@@ -45,7 +45,7 @@ public class GrabController : MonoBehaviour
             }
 
             if (Input.GetKeyDown(Grab) && !isHoldingSomething)
-            {   
+            {
                 grabCheckedOrb.transform.parent = orbHolder;
                 grabCheckedOrb.transform.position = orbHolder.position;
                 grabCheckedOrb.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -65,48 +65,48 @@ public class GrabController : MonoBehaviour
         }
 
         else if (Input.GetKeyDown(Grab) && isHoldingSomething)
+        {
+            activeOrb.transform.parent = null;
+            activeOrb.GetComponent<Rigidbody2D>().isKinematic = false;
+            activeOrb.GetComponent<Rigidbody2D>().velocity = playerMovement.rb.velocity;
+
+            isHoldingSomething = false;
+
+            lastActiveOrb = activeOrb;
+        }
+    }
+
+
+    /* 
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.layer != LayerMask.NameToLayer("whatIsGround"))
             {
-                activeOrb.transform.parent = null;
-                activeOrb.GetComponent<Rigidbody2D>().isKinematic = false;
-                activeOrb.GetComponent<Rigidbody2D>().velocity = playerMovement.rb.velocity;
-
-                isHoldingSomething = false;
-
-                lastActiveOrb = activeOrb;
+                CircleCollider2D orbHolderCollider = orbHolder.GetComponent<CircleCollider2D>();
+                orbHolderCollider.radius = 0.2f;
+                isInWall = true;
             }
         }
 
-        
-/* 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer != LayerMask.NameToLayer("whatIsGround"))
+        void OnTriggerExit2D(Collider2D other)
         {
-            CircleCollider2D orbHolderCollider = orbHolder.GetComponent<CircleCollider2D>();
-            orbHolderCollider.radius = 0.2f;
-            isInWall = true;
-        }
-    }
+            if (other.gameObject.layer != LayerMask.NameToLayer("whatIsGround"))
+            {
+                CircleCollider2D orbHolderCollider = orbHolder.GetComponent<CircleCollider2D>();
+                orbHolderCollider.radius = 0f;
+                isInWall = false;
+            }
+        } */
 
-    void OnTriggerExit2D(Collider2D other)
+    private void OnDrawGizmosSelected()
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("whatIsGround"))
+        if (transform.localScale.x > 0)
         {
-            CircleCollider2D orbHolderCollider = orbHolder.GetComponent<CircleCollider2D>();
-            orbHolderCollider.radius = 0f;
-            isInWall = false;
+            Debug.DrawRay(grabDetect.position, Vector3.right * rayDist, Color.cyan);
         }
-    } */
-
-    private void OnDrawGizmosSelected() 
-    {
-    if (transform.localScale.x > 0)
-    {
-        Debug.DrawRay(grabDetect.position, Vector3.right * rayDist, Color.cyan);
-    }
-    else
-    {
-        Debug.DrawRay(grabDetect.position, Vector3.left * rayDist, Color.cyan);
-    }
+        else
+        {
+            Debug.DrawRay(grabDetect.position, Vector3.left * rayDist, Color.cyan);
+        }
     }
 }

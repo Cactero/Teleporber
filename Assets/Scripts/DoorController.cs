@@ -5,7 +5,8 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     private Animator animator;
-    void Awake() {
+    void Awake()
+    {
         {
             animator = GetComponent<Animator>();
         }

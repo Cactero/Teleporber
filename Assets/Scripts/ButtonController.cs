@@ -10,7 +10,7 @@ public class ButtonController : MonoBehaviour
         Anything,
         Orb
     };
-        
+
     [Header("Objects")]
     public AcceptedObject acceptedObject;
     public GameObject affectedDoor;
@@ -18,12 +18,12 @@ public class ButtonController : MonoBehaviour
     //[Header("Values")]    
     //public bool doorAcceptsAnything;
     private DoorController doorController;
-    
+
     void Start()
     {
         doorController = affectedDoor.GetComponent<DoorController>();
     }
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == acceptedObject.ToString() || acceptedObject == 0)
         {
@@ -31,7 +31,7 @@ public class ButtonController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) 
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == acceptedObject.ToString() || acceptedObject == 0)
         {

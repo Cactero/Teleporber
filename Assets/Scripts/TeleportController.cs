@@ -34,25 +34,26 @@ public class TeleportController : MonoBehaviour
         }
         else if (Input.GetKeyDown(teleport) && !isOrbInRadius)
         {
-                Debug.Log("You have to be close to the orb to teleport!");
+            Debug.Log("You have to be close to the orb to teleport!");
         }
     }
 
     void Teleport()
-    {   
-        playerDestination = new Vector2 (grabController.activeOrb.transform.position.x, grabController.activeOrb.transform.position.y + 0.5f);
-        orbDestination = new Vector2 (transform.position.x, transform.position.y + 0.5f);
+    {
+        playerDestination = new Vector2(grabController.activeOrb.transform.position.x, grabController.activeOrb.transform.position.y + 0.5f);
+        orbDestination = new Vector2(transform.position.x, transform.position.y + 0.5f);
 
         transform.position = playerDestination;
         grabController.activeOrb.transform.position = orbDestination;
         grabController.lastActiveOrb.SetActive(false);
     }
 
-    private void OnDrawGizmosSelected() {
-     Gizmos.color = Color.red;
-     Gizmos.DrawWireSphere (transform.position, teleportRadius);
- }
- 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, teleportRadius);
+    }
+
 }
 
 /*

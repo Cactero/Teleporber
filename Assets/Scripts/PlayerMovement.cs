@@ -40,16 +40,16 @@ public class PlayerMovement : MonoBehaviour
         movement = Input.GetAxisRaw("Horizontal");
         if (Mathf.Abs(movement) > 0)
         {
-            rb.velocity = new Vector2(movement * moveSpeed * Time.deltaTime, rb.velocity.y); 
+            rb.velocity = new Vector2(movement * moveSpeed * Time.deltaTime, rb.velocity.y);
         }
     }
 
     void Jump()
     {
         if (isGrounded)
-            {
-                rb.velocity = Vector2.up * jumpForce;
-            }
+        {
+            rb.velocity = Vector2.up * jumpForce;
+        }
     }
 
     void PlayerAnimation()
